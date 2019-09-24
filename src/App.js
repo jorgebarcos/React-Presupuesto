@@ -4,13 +4,26 @@ import Pregunta from './components/Pregunta';
 function App() {
 	// state
 	const [ presupuesto, guardarPresupuesto ] = useState(0);
+	const [ preguntaPresupuesto, guardarPreguntaPresupuesto ] = useState(true);
 
 	return (
 		<div className="App container">
 			<header>
 				<h1>Gasto Semanal</h1>
 				<div className="contenido-principal contenido">
-					<Pregunta />
+					{preguntaPresupuesto ? (
+						<Pregunta
+							guardarPresupuesto={guardarPresupuesto}
+							guardarPreguntaPresupuesto={guardarPreguntaPresupuesto}
+						/>
+					) : (
+						<div className="row">
+							<div className="one-half column">
+								<p>Formulario aqui</p>
+							</div>
+							<div className="one-half column" />
+						</div>
+					)}
 				</div>
 			</header>
 		</div>
