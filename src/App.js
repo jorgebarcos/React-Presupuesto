@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Pregunta from './components/Pregunta';
 import Formulario from './components/Formulario';
 import Listado from './components/Listado';
+import ControlPresupuesto from './components/ControlPresupuesto';
 
 function App() {
 	// state
 	const [ presupuesto, guardarPresupuesto ] = useState(0);
+	const [ restante, guardarRestante ] = useState(0);
 	const [ preguntaPresupuesto, guardarPreguntaPresupuesto ] = useState(true);
 	const [ crearGasto, guardarCrearGasto ] = useState(false);
 	const [ gasto, guardarGasto ] = useState({});
@@ -23,18 +25,6 @@ function App() {
 		},
 		[ crearGasto ]
 	);
-	/*useEffect(
-		() => {
-			if (!Object.keys(item).length) return;
-
-			const listadoGastos = [ ...gastos, gasto ];
-			guardarGastos(listadoGastos);
-
-			// Una vez que se agrega, lo ponemos como false
-			guardarCrearGasto(false);
-		},
-		[ crearGasto ]
-	);*/
 
 	return (
 		<div className="App container">
@@ -45,6 +35,7 @@ function App() {
 						<Pregunta
 							guardarPresupuesto={guardarPresupuesto}
 							guardarPreguntaPresupuesto={guardarPreguntaPresupuesto}
+							guardarRestante={guardarRestante}
 						/>
 					) : (
 						<div className="row">
@@ -53,6 +44,8 @@ function App() {
 							</div>
 							<div className="one-half column">
 								<Listado gastos={gastos} />
+
+								<ControlPresupuesto presupuesto={presupuesto} restante={restante} />
 							</div>
 						</div>
 					)}
