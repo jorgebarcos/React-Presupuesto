@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pregunta from './components/Pregunta';
 import Formulario from './components/Formulario';
+import Listado from './components/Listado';
+
 function App() {
 	// state
 	const [ presupuesto, guardarPresupuesto ] = useState(0);
 	const [ preguntaPresupuesto, guardarPreguntaPresupuesto ] = useState(true);
 	const [ gasto, guardarGasto ] = useState({});
 	const [ gastos, guardarGastos ] = useState([]);
+
+	useEffect(() => {
+		const listadoGastos = [ ...gastos, gasto ];
+		guardarGastos(listadoGastos);
+	}, []);
 
 	return (
 		<div className="App container">
@@ -23,7 +30,9 @@ function App() {
 							<div className="one-half column">
 								<Formulario guardarGasto={guardarGasto} />
 							</div>
-							<div className="one-half column" />
+							<div className="one-half column">
+								<Listado gastos={gastos} />
+							</div>
 						</div>
 					)}
 				</div>
